@@ -4,39 +4,26 @@
 
 ## Install
 
-```bash
-$ npm install --global react-third-hand
+```
+$ npm i -g react-third-hand
+```
+
+or
+
+```
+$ yarn -g react-third-hand
 ```
 
 ## CLI
 
 ```
-$ react-third-hand --help
-
-  Usage
-    $ react-third-hand
-
-  Options
-    --name  Your name
-
-  Examples
-    $ react-third-hand --name=Jane
-    Hello, Jane
+$ react-third-hand
 ```
 
 ### Options
 
-0. CRA / NEXT / React Native / CUSTOM (webpack)
-1. YARN / NPM
-2. JS / TS
-3. ESLINT | STYLELINT | PRETTIER | HUSKY + LINT STAGED | VSCODE
-   4? STYLELINT: SCSS/Styled-Components
-
-4. CRA
-   установка
-   eslint:
-   prettier: prettier eslint-config-prettier eslint-plugin-prettier
-   stylelint: stylelint stylelint-config-standard stylelint-order stylelint-order-config-standard
-   stylelint-sc: stylelint-config-styled-components stylelint-processor-styled-components
-   stylelint-scss: stylelint-config-standard-scss
-   husky:
+0. App type: **Create React App** / **Next** / **Vite**
+1. Package Manager: **yarn** / **npm**
+2. Language: **TypeScript** / **JavaScript**
+3. Helpers: **ESLint**, **Stylelint**, **Prettier**, **Husky + lint-staged**, **VSCode**
+4. Styling: **CSS** / **SCSS** / **Styled Components**
