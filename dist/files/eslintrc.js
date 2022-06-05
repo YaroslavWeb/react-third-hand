@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eslintIgnore = exports.vite_eslint_prettier = exports.vite_eslint = exports.next_eslint_prettier = exports.next_eslint = exports.cra_ts_eslint_prettier = exports.cra_ts_eslint = exports.cra_js_eslint_prettier = exports.cra_js_eslint = exports.vite_base_eslint = exports.next_base_eslint = exports.cra_base_eslint = void 0;
 exports.cra_base_eslint = `{
   "extends": ["react-app", "react-app/jest"],
-  "setting": {}
+  "setting": {},
+  "plugins": [],
   "rules": {
     "import/order": [
       2,
@@ -79,18 +80,18 @@ exports.vite_base_eslint = `{
 const generateWithTypescript = (config) => {
     const current = JSON.parse(config);
     current.setting["import/resolver"] = { typescript: {} };
-    return current;
+    return JSON.stringify(current);
 };
 const generateWithPrettier = (config) => {
     const current = JSON.parse(config);
     current.plugins = ["prettier"];
     current.rules["prettier/prettier"] = 2;
-    return current;
+    return JSON.stringify(current);
 };
 exports.cra_js_eslint = exports.cra_base_eslint;
 exports.cra_js_eslint_prettier = generateWithPrettier(exports.cra_base_eslint);
 exports.cra_ts_eslint = generateWithTypescript(exports.cra_base_eslint);
-exports.cra_ts_eslint_prettier = generateWithPrettier(generateWithTypescript(exports.cra_base_eslint));
+exports.cra_ts_eslint_prettier = generateWithPrettier(exports.cra_ts_eslint);
 exports.next_eslint = exports.next_base_eslint;
 exports.next_eslint_prettier = generateWithPrettier(exports.next_base_eslint);
 exports.vite_eslint = exports.vite_base_eslint;

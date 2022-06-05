@@ -94,7 +94,6 @@ export const createFiles = (values: I_StepValues) => {
 		fs.writeFileSync("./.stylelintignore", eslintIgnore);
 		if (values.step_4 === E_Styles.css) {
 			packageJSON.scripts[scripts[values.step_4]] = "stylelint src/";
-
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.stylelintrc", stylelint_css_prettier);
 			} else {
@@ -104,7 +103,6 @@ export const createFiles = (values: I_StepValues) => {
 
 		if (values.step_4 === E_Styles.scss) {
 			packageJSON.scripts[scripts[values.step_4]] = "stylelint src/";
-
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.stylelintrc", stylelint_scss_prettier);
 			} else {
@@ -114,7 +112,6 @@ export const createFiles = (values: I_StepValues) => {
 
 		if (values.step_4 === E_Styles.sc) {
 			packageJSON.scripts[scripts[values.step_4]] = "stylelint src/";
-
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.stylelintrc", stylelint_sc_prettier);
 			} else {

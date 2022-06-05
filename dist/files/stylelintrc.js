@@ -62,7 +62,7 @@ exports.stylelint_sc = `{
 const generateWithPrettier = (config) => {
     const current = JSON.parse(config);
     current.extends.push("stylelint-config-prettier");
-    return current;
+    return JSON.stringify(current);
 };
 exports.stylelint_css_prettier = generateWithPrettier(exports.stylelint_css);
 exports.stylelint_scss_prettier = generateWithPrettier(exports.stylelint_scss);

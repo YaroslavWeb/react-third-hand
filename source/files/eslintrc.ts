@@ -1,6 +1,7 @@
 export const cra_base_eslint = `{
   "extends": ["react-app", "react-app/jest"],
-  "setting": {}
+  "setting": {},
+  "plugins": [],
   "rules": {
     "import/order": [
       2,
@@ -76,25 +77,23 @@ export const vite_base_eslint = `{
 }
 `;
 
-const generateWithTypescript = (config: any): string => {
+const generateWithTypescript = (config: string): string => {
 	const current = JSON.parse(config);
 	current.setting["import/resolver"] = { typescript: {} };
-	return current;
+	return JSON.stringify(current);
 };
 
-const generateWithPrettier = (config: any): string => {
+const generateWithPrettier = (config: string): string => {
 	const current = JSON.parse(config);
 	current.plugins = ["prettier"];
 	current.rules["prettier/prettier"] = 2;
-	return current;
+	return JSON.stringify(current);
 };
 
 export const cra_js_eslint = cra_base_eslint;
 export const cra_js_eslint_prettier = generateWithPrettier(cra_base_eslint);
 export const cra_ts_eslint = generateWithTypescript(cra_base_eslint);
-export const cra_ts_eslint_prettier = generateWithPrettier(
-	generateWithTypescript(cra_base_eslint)
-);
+export const cra_ts_eslint_prettier = generateWithPrettier(cra_ts_eslint);
 
 export const next_eslint = next_base_eslint;
 export const next_eslint_prettier = generateWithPrettier(next_base_eslint);
