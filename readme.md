@@ -11,7 +11,7 @@ $ npm i -g react-third-hand
 or
 
 ```
-$ yarn -g react-third-hand
+$ yarn add -g react-third-hand
 ```
 
 ## CLI

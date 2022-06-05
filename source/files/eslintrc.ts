@@ -1,5 +1,6 @@
 export const cra_base_eslint = `{
   "extends": ["react-app", "react-app/jest"],
+  "setting": {}
   "rules": {
     "import/order": [
       2,
