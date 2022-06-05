@@ -8,12 +8,6 @@
 $ npm i -g react-third-hand
 ```
 
-or
-
-```
-$ yarn add -g react-third-hand
-```
-
 ## CLI
 
 Start command in your React App
