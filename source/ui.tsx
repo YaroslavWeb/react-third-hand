@@ -10,7 +10,7 @@ import { Styles_4 } from "./steps/Styles_4";
 import { E_Helpers, I_Item, I_StepValues } from "./interfaces";
 import { initialStepValues } from "./data";
 import { combineCommands } from "./commands";
-import { createFiles, modifyPackageJSON, modifyTsconfigJSON } from "./files";
+import { createFiles } from "./files";
 
 const App: FC = () => {
 	const [step, setStep] = useState(0);
@@ -49,13 +49,7 @@ const App: FC = () => {
 		execSync(command, { stdio: "inherit" });
 
 		// Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
-		createFiles();
-
-		// Модификация package.json
-		modifyPackageJSON();
-
-		// Модификация tsconfig.json
-		modifyTsconfigJSON();
+		createFiles(stepValues);
 
 		console.log("Restart your VSCode! To enable ESLint and stylelint parser.");
 	};

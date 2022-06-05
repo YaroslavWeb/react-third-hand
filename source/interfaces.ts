@@ -6,7 +6,7 @@ export interface I_Item {
 export enum E_App {
 	cra = "cra",
 	next = "next",
-	custom = "custom",
+	vite = "vite",
 }
 
 export enum E_PackageManager {
@@ -28,6 +28,7 @@ export enum E_Helpers {
 }
 
 export enum E_Styles {
+	css = "css",
 	sc = "sc",
 	scss = "scss",
 }

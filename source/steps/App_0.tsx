@@ -14,8 +14,8 @@ const items: I_Item[] = [
 		value: E_App.next,
 	},
 	{
-		label: "Webpack/Vite",
-		value: E_App.custom,
+		label: "Vite",
+		value: E_App.vite,
 	},
 ];
 

@@ -7,18 +7,23 @@ exports.Styles_4 = void 0;
 const react_1 = __importDefault(require("react"));
 const ink_1 = require("ink");
 const ink_select_input_1 = __importDefault(require("ink-select-input"));
+const interfaces_1 = require("../interfaces");
 const Styles_4 = ({ onSelect, }) => {
     const handleSelect = (item) => {
         onSelect(item);
     };
     const items = [
         {
-            label: "Styled Components",
-            value: "sc",
+            label: "CSS",
+            value: interfaces_1.E_Styles.css,
         },
         {
             label: "SCSS/SASS",
-            value: "scss",
+            value: interfaces_1.E_Styles.scss,
+        },
+        {
+            label: "Styled Components",
+            value: interfaces_1.E_Styles.sc,
         },
     ];
     return (react_1.default.createElement(react_1.default.Fragment, null,

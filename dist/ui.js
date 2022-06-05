@@ -58,7 +58,7 @@ const App = () => {
         if (step === 5) {
             setTimeout(() => {
                 rockAndRoll();
-            }, 200);
+            });
         }
     }, [step]);
     const rockAndRoll = () => {
@@ -67,12 +67,8 @@ const App = () => {
         // Установка пакетов
         (0, child_process_1.execSync)(command, { stdio: "inherit" });
         // Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
-        (0, files_1.createFiles)();
-        // Модификация package.json
-        (0, files_1.modifyPackageJSON)();
-        // Модификация tsconfig.json
-        (0, files_1.modifyTsconfigJSON)();
-        console.log("Restart your VSCode!");
+        (0, files_1.createFiles)(stepValues);
+        console.log("Restart your VSCode! To enable ESLint and stylelint parser.");
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         step === 0 && react_1.default.createElement(App_0_1.App_0, { onSelect: (item) => handleSelect(item) }),

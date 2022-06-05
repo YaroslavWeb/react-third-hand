@@ -1,3 +1,3 @@
-export declare const createFiles: () => void;
-export declare const modifyPackageJSON: () => void;
+import { I_StepValues } from "../interfaces";
+export declare const createFiles: (values: I_StepValues) => void;
 export declare const modifyTsconfigJSON: () => void;

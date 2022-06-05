@@ -5,7 +5,7 @@ var E_App;
 (function (E_App) {
     E_App["cra"] = "cra";
     E_App["next"] = "next";
-    E_App["custom"] = "custom";
+    E_App["vite"] = "vite";
 })(E_App = exports.E_App || (exports.E_App = {}));
 var E_PackageManager;
 (function (E_PackageManager) {
@@ -27,6 +27,7 @@ var E_Helpers;
 })(E_Helpers = exports.E_Helpers || (exports.E_Helpers = {}));
 var E_Styles;
 (function (E_Styles) {
+    E_Styles["css"] = "css";
     E_Styles["sc"] = "sc";
     E_Styles["scss"] = "scss";
 })(E_Styles = exports.E_Styles || (exports.E_Styles = {}));

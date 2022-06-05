@@ -10,42 +10,90 @@ import {
 
 export const combineCommands = (values: I_StepValues): string => {
 	let command = "";
+	// Если пользователь использует yarn
+	if (values.step_1 === E_PackageManager.yarn) {
+		command += "yarn add -D";
+	}
+	// Если пользователь использует npm
+	if (values.step_1 === E_PackageManager.npm) {
+		command += "npm i -D";
+	}
+
 	// Если пользователь выбрал Create React App
 	if (values.step_0 === E_App.cra) {
-		// Если пользователь использует yarn
-		if (values.step_1 === E_PackageManager.yarn) {
-			command += "yarn add -D";
-		}
-		// Если пользователь использует typescript
-		if (values.step_2 === E_Language.ts) {
-			// Если пользователь использует prettier
-			if (values.step_3.includes(E_Helpers.prettier)) {
-				command += " prettier eslint-config-prettier eslint-plugin-prettier";
+		if (values.step_3.includes(E_Helpers.prettier)) {
+			command += " prettier";
+
+			if (values.step_3.includes(E_Helpers.eslint)) {
+				command += " eslint-config-prettier eslint-plugin-prettier";
 			}
 
-			// Если пользователь использует eslint
-			if (values.step_3.includes(E_Helpers.prettier)) {
-				command += " eslint-import-resolver-typescript";
-			}
-
-			// Если пользователь использует stylelint
 			if (values.step_3.includes(E_Helpers.stylelint)) {
-				command +=
-					" stylelint stylelint-config-standard stylelint-order stylelint-order-config-standard";
+				command += " stylelint-prettier stylelint-config-prettier";
+			}
+		}
 
-				// Если пользователь использует Styled Components
-				if (values.step_4 === E_Styles.sc) {
-					command +=
-						" stylelint-config-styled-components stylelint-processor-styled-components";
-				}
-
-				// Если пользователь использует SCSS/SASS
-				if (values.step_4 === E_Styles.scss) {
-					command += " stylelint-config-standard-scss";
-				}
+		if (values.step_3.includes(E_Helpers.eslint)) {
+			if (values.step_2 === E_Language.ts) {
+				command += " eslint-import-resolver-typescript";
 			}
 		}
 	}
+
+	// Если пользователь выбрал Next
+	if (values.step_0 === E_App.next) {
+		if (values.step_3.includes(E_Helpers.prettier)) {
+			command += " prettier";
+
+			if (values.step_3.includes(E_Helpers.eslint)) {
+				command += " eslint-config-prettier eslint-plugin-prettier";
+			}
+
+			if (values.step_3.includes(E_Helpers.stylelint)) {
+				command += " stylelint-prettier stylelint-config-prettier";
+			}
+		}
+	}
+
+	// Если пользователь выбрал vite
+	if (values.step_0 === E_App.vite) {
+		if (values.step_3.includes(E_Helpers.eslint)) {
+			command +=
+				" eslint eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import";
+			if (values.step_2 === E_Language.ts) {
+				command +=
+					" eslint-import-resolver-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin";
+			}
+		}
+
+		if (values.step_3.includes(E_Helpers.prettier)) {
+			command += " prettier";
+
+			if (values.step_3.includes(E_Helpers.eslint)) {
+				command += " eslint-config-prettier eslint-plugin-prettier";
+			}
+
+			if (values.step_3.includes(E_Helpers.stylelint)) {
+				command += " stylelint-prettier stylelint-config-prettier";
+			}
+		}
+	}
+
+	// Если пользователь использует stylelint
+	if (values.step_3.includes(E_Helpers.stylelint)) {
+		command +=
+			" stylelint stylelint-config-standard stylelint-order stylelint-order-config-standard";
+
+		if (values.step_4 === E_Styles.sc) {
+			command +=
+				" stylelint-config-styled-components stylelint-processor-styled-components";
+		}
+
+		if (values.step_4 === E_Styles.scss) {
+			command += " stylelint-config-standard-scss";
+		}
+	}
+
 	// Если пользователь использует Husky + LS
 	if (values.step_3.includes(E_Helpers.h_ls)) {
 		command += husky_commands[values.step_1];

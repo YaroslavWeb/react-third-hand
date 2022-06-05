@@ -2,6 +2,8 @@ import React, { FC } from "react";
 import { Text } from "ink";
 import SelectInput from "ink-select-input";
 
+import { E_Styles } from "../interfaces";
+
 export const Styles_4: FC<{ onSelect: (item: any) => void }> = ({
 	onSelect,
 }) => {
@@ -11,12 +13,16 @@ export const Styles_4: FC<{ onSelect: (item: any) => void }> = ({
 
 	const items = [
 		{
-			label: "Styled Components",
-			value: "sc",
+			label: "CSS",
+			value: E_Styles.css,
 		},
 		{
 			label: "SCSS/SASS",
-			value: "scss",
+			value: E_Styles.scss,
+		},
+		{
+			label: "Styled Components",
+			value: E_Styles.sc,
 		},
 	];
 
