@@ -16,6 +16,8 @@ $ yarn -g react-third-hand
 
 ## CLI
 
+Start command in your React App
+
 ```
 $ react-third-hand
 ```
