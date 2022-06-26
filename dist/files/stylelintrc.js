@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.stylelintIgnore_sc = exports.stylelintIgnore = exports.stylelint_sc_prettier = exports.stylelint_scss_prettier = exports.stylelint_css_prettier = exports.stylelint_sc = exports.stylelint_scss = exports.stylelint_css = void 0;
 exports.stylelint_css = `{
-  "extends": ["stylelint-config-standard", "stylelint-config-idiomatic-order"],
+  "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
   "plugins": ["stylelint-order"],
   "rules": {
     "no-empty-source": null,
@@ -16,7 +16,7 @@ exports.stylelint_css = `{
 exports.stylelint_scss = `{
   "extends": [
     "stylelint-config-standard-scss",
-    "stylelint-config-idiomatic-order"
+    "stylelint-config-clean-order"
   ],
   "plugins": ["stylelint-order"],
   "rules": {
@@ -51,7 +51,7 @@ exports.stylelint_sc = `{
     "stylelint-config-recommended",
     "stylelint-config-styled-components",
     "stylelint-config-standard",
-    "stylelint-config-idiomatic-order"
+    "stylelint-config-clean-order"
   ],
   "plugins": ["stylelint-order"],
   "rules": {

@@ -78,7 +78,7 @@ const App = () => {
         step === 3 && (react_1.default.createElement(Helpers_3_1.Helpers_3, { onSubmit: (items) => handleSubmitHelpers(items) })),
         step === 4 && (react_1.default.createElement(Styles_4_1.Styles_4, { onSelect: (item) => handleSelect(item) })),
         step === 5 && (react_1.default.createElement(react_1.default.Fragment, null,
-            react_1.default.createElement(ink_1.Text, null, "You'r finale choice:"),
+            react_1.default.createElement(ink_1.Text, null, "Your final choice:"),
             stepItems.map((item) => (react_1.default.createElement(ink_1.Text, { key: item.value, color: "blueBright" }, item.label))),
             react_1.default.createElement(ink_1.Text, { backgroundColor: "blueBright", color: "whiteBright" }, info)))));
 };

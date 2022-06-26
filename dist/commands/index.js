@@ -69,7 +69,7 @@ const combineCommands = (values) => {
     // Если пользователь использует stylelint
     if (values.step_3.includes(interfaces_1.E_Helpers.stylelint)) {
         command +=
-            " stylelint stylelint-config-standard stylelint-config-idiomatic-order";
+            " stylelint stylelint-config-standard stylelint-config-clean-order";
         if (values.step_4 === interfaces_1.E_Styles.sc) {
             command +=
                 " stylelint-config-styled-components stylelint-processor-styled-components";
