@@ -1,5 +1,5 @@
 export const stylelint_css = `{
-  "extends": ["stylelint-config-standard", "stylelint-order-config-standard"],
+  "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
   "plugins": ["stylelint-order"],
   "rules": {
     "no-empty-source": null,
@@ -14,7 +14,7 @@ export const stylelint_css = `{
 export const stylelint_scss = `{
   "extends": [
     "stylelint-config-standard-scss",
-    "stylelint-order-config-standard"
+    "stylelint-config-clean-order"
   ],
   "plugins": ["stylelint-order"],
   "rules": {
@@ -50,7 +50,7 @@ export const stylelint_sc = `{
     "stylelint-config-recommended",
     "stylelint-config-styled-components",
     "stylelint-config-standard",
-    "stylelint-order-config-standard"
+    "stylelint-config-clean-order"
   ],
   "plugins": ["stylelint-order"],
   "rules": {
@@ -62,7 +62,7 @@ export const stylelint_sc = `{
 const generateWithPrettier = (config: string): string => {
 	const current = JSON.parse(config);
 	current.extends.push("stylelint-config-prettier");
-	return JSON.stringify(current);
+	return JSON.stringify(current, null, 2);
 };
 
 export const stylelint_css_prettier = generateWithPrettier(stylelint_css);
@@ -75,5 +75,8 @@ export const stylelintIgnore = `*.tsx
 *.js
 *.md
 *.svg
+*.html
 /node_modules
 `;
+
+export const stylelintIgnore_sc = ``;

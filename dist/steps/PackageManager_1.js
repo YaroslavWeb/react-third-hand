@@ -24,6 +24,10 @@ const PackageManager_1 = ({ onSelect, }) => {
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         react_1.default.createElement(ink_1.Text, { color: "green" }, "Choose your Package Manager:"),
-        react_1.default.createElement(ink_select_input_1.default, { items: items, onSelect: handleSelect })));
+        react_1.default.createElement(ink_select_input_1.default, { items: items, onSelect: handleSelect }),
+        react_1.default.createElement(ink_1.Text, null, "____"),
+        react_1.default.createElement(ink_1.Text, { color: "#F07427" }, "Soon:"),
+        react_1.default.createElement(ink_1.Text, null, "yarn 2"),
+        react_1.default.createElement(ink_1.Text, null, "pnpm")));
 };
 exports.PackageManager_1 = PackageManager_1;

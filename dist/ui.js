@@ -38,6 +38,7 @@ const App = () => {
     const [step, setStep] = (0, react_1.useState)(0);
     const [stepItems, setStepItems] = (0, react_1.useState)([]);
     const [stepValues, setStepValues] = (0, react_1.useState)(data_1.initialStepValues);
+    const [info, setInfo] = (0, react_1.useState)("");
     const handleSelect = (item) => {
         setStepValues((prev) => ({ ...prev, [`step_${step}`]: item.value }));
         setStep((prev) => ++prev);
@@ -58,17 +59,17 @@ const App = () => {
         if (step === 5) {
             setTimeout(() => {
                 rockAndRoll();
-            });
+            }, 1000);
         }
     }, [step]);
     const rockAndRoll = () => {
         const command = (0, commands_1.combineCommands)(stepValues);
-        console.log(command);
+        setInfo(`${command}`);
         // Установка пакетов
         (0, child_process_1.execSync)(command, { stdio: "inherit" });
         // Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
         (0, files_1.createFiles)(stepValues);
-        console.log("Restart your VSCode! To enable ESLint and stylelint parser.");
+        setInfo("Restart your VSCode! To enable ESLint and StyleLint parser.");
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         step === 0 && react_1.default.createElement(App_0_1.App_0, { onSelect: (item) => handleSelect(item) }),
@@ -78,7 +79,8 @@ const App = () => {
         step === 4 && (react_1.default.createElement(Styles_4_1.Styles_4, { onSelect: (item) => handleSelect(item) })),
         step === 5 && (react_1.default.createElement(react_1.default.Fragment, null,
             react_1.default.createElement(ink_1.Text, null, "You'r finale choice:"),
-            stepItems.map((item) => (react_1.default.createElement(ink_1.Text, { key: item.value, color: "blueBright" }, item.label)))))));
+            stepItems.map((item) => (react_1.default.createElement(ink_1.Text, { key: item.value, color: "blueBright" }, item.label))),
+            react_1.default.createElement(ink_1.Text, { backgroundColor: "blueBright", color: "whiteBright" }, info)))));
 };
 module.exports = App;
 exports.default = App;

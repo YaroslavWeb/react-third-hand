@@ -1,6 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.combineCommands = void 0;
+const fs_1 = __importDefault(require("fs"));
 const husky_1 = require("./husky");
 const interfaces_1 = require("../interfaces");
 const combineCommands = (values) => {
@@ -65,7 +69,7 @@ const combineCommands = (values) => {
     // Если пользователь использует stylelint
     if (values.step_3.includes(interfaces_1.E_Helpers.stylelint)) {
         command +=
-            " stylelint stylelint-config-standard stylelint-order stylelint-order-config-standard";
+            " stylelint stylelint-config-standard stylelint-config-idiomatic-order";
         if (values.step_4 === interfaces_1.E_Styles.sc) {
             command +=
                 " stylelint-config-styled-components stylelint-processor-styled-components";
@@ -73,6 +77,10 @@ const combineCommands = (values) => {
         if (values.step_4 === interfaces_1.E_Styles.scss) {
             command += " stylelint-config-standard-scss";
         }
+    }
+    // Если гит не инициализирован в проекте
+    if (!fs_1.default.existsSync("./.git")) {
+        command += " && git init";
     }
     // Если пользователь использует Husky + LS
     if (values.step_3.includes(interfaces_1.E_Helpers.h_ls)) {

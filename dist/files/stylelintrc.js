@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stylelintIgnore = exports.stylelint_sc_prettier = exports.stylelint_scss_prettier = exports.stylelint_css_prettier = exports.stylelint_sc = exports.stylelint_scss = exports.stylelint_css = void 0;
+exports.stylelintIgnore_sc = exports.stylelintIgnore = exports.stylelint_sc_prettier = exports.stylelint_scss_prettier = exports.stylelint_css_prettier = exports.stylelint_sc = exports.stylelint_scss = exports.stylelint_css = void 0;
 exports.stylelint_css = `{
-  "extends": ["stylelint-config-standard", "stylelint-order-config-standard"],
+  "extends": ["stylelint-config-standard", "stylelint-config-idiomatic-order"],
   "plugins": ["stylelint-order"],
   "rules": {
     "no-empty-source": null,
@@ -16,7 +16,7 @@ exports.stylelint_css = `{
 exports.stylelint_scss = `{
   "extends": [
     "stylelint-config-standard-scss",
-    "stylelint-order-config-standard"
+    "stylelint-config-idiomatic-order"
   ],
   "plugins": ["stylelint-order"],
   "rules": {
@@ -51,7 +51,7 @@ exports.stylelint_sc = `{
     "stylelint-config-recommended",
     "stylelint-config-styled-components",
     "stylelint-config-standard",
-    "stylelint-order-config-standard"
+    "stylelint-config-idiomatic-order"
   ],
   "plugins": ["stylelint-order"],
   "rules": {
@@ -62,7 +62,7 @@ exports.stylelint_sc = `{
 const generateWithPrettier = (config) => {
     const current = JSON.parse(config);
     current.extends.push("stylelint-config-prettier");
-    return JSON.stringify(current);
+    return JSON.stringify(current, null, 2);
 };
 exports.stylelint_css_prettier = generateWithPrettier(exports.stylelint_css);
 exports.stylelint_scss_prettier = generateWithPrettier(exports.stylelint_scss);
@@ -73,5 +73,7 @@ exports.stylelintIgnore = `*.tsx
 *.js
 *.md
 *.svg
+*.html
 /node_modules
 `;
+exports.stylelintIgnore_sc = ``;

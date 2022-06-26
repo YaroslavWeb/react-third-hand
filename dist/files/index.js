@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.modifyTsconfigJSON = exports.createFiles = void 0;
+exports.modifyPreCommitFile = exports.modifyTsconfigJSON = exports.createFiles = void 0;
 const fs_1 = __importDefault(require("fs"));
 const eslintrc_1 = require("./eslintrc");
 const prettier_1 = require("./prettier");
@@ -21,7 +21,8 @@ const createFiles = (values) => {
         (0, exports.modifyTsconfigJSON)();
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
             fs_1.default.writeFileSync("./.eslintignore", eslintrc_1.eslintIgnore);
-            packageJSON.scripts["lint:es"] = "eslint src/";
+            packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
+            packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
             if (values.step_2 === interfaces_1.E_Language.js) {
                 if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.cra_js_eslint_prettier);
@@ -42,6 +43,9 @@ const createFiles = (values) => {
     }
     if (values.step_0 === interfaces_1.E_App.next) {
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
+            packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
+            packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
+            fs_1.default.rmSync("./.eslintrc.json");
             if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.next_eslint_prettier);
             }
@@ -52,12 +56,20 @@ const createFiles = (values) => {
     }
     if (values.step_0 === interfaces_1.E_App.vite) {
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
+            packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
+            packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
             if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier);
             }
             else {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint);
             }
+        }
+    }
+    // ESLint
+    if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
+        if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
+            fs_1.default.writeFileSync("./.prettierrc", prettier_1.prettier);
         }
     }
     // Prettier
@@ -68,9 +80,10 @@ const createFiles = (values) => {
     }
     // Stylelint
     if (values.step_3.includes(interfaces_1.E_Helpers.stylelint)) {
-        fs_1.default.writeFileSync("./.stylelintignore", eslintrc_1.eslintIgnore);
         if (values.step_4 === interfaces_1.E_Styles.css) {
+            fs_1.default.writeFileSync("./.stylelintignore", stylelintrc_1.stylelintIgnore);
             packageJSON.scripts[scripts_1.scripts[values.step_4]] = "stylelint src/";
+            packageJSON.scripts[scripts_1.scripts[values.step_4] + ":fix"] = `${scripts_1.scripts[values.step_4]} -- --fix`;
             if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                 fs_1.default.writeFileSync("./.stylelintrc", stylelintrc_1.stylelint_css_prettier);
             }
@@ -79,7 +92,9 @@ const createFiles = (values) => {
             }
         }
         if (values.step_4 === interfaces_1.E_Styles.scss) {
+            fs_1.default.writeFileSync("./.stylelintignore", stylelintrc_1.stylelintIgnore);
             packageJSON.scripts[scripts_1.scripts[values.step_4]] = "stylelint src/";
+            packageJSON.scripts[scripts_1.scripts[values.step_4] + ":fix"] = `${scripts_1.scripts[values.step_4]} -- --fix`;
             if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                 fs_1.default.writeFileSync("./.stylelintrc", stylelintrc_1.stylelint_scss_prettier);
             }
@@ -88,6 +103,7 @@ const createFiles = (values) => {
             }
         }
         if (values.step_4 === interfaces_1.E_Styles.sc) {
+            fs_1.default.writeFileSync("./.stylelintignore", stylelintrc_1.stylelintIgnore_sc);
             packageJSON.scripts[scripts_1.scripts[values.step_4]] = "stylelint src/";
             if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                 fs_1.default.writeFileSync("./.stylelintrc", stylelintrc_1.stylelint_sc_prettier);
@@ -98,9 +114,8 @@ const createFiles = (values) => {
         }
     }
     if (values.step_3.includes(interfaces_1.E_Helpers.h_ls)) {
-        packageJSON["lint-staged"] = {
-            "*.(ts|tsx|js|jsx)": ["yarn lint:es", (0, scripts_1.getStyleScript)(values.step_4)],
-        };
+        packageJSON["lint-staged"] = (0, scripts_1.getLintStagedScripts)(values.step_3, values.step_4);
+        (0, exports.modifyPreCommitFile)();
     }
     // Пересоздаём package.json
     fs_1.default.writeFileSync("package.json", JSON.stringify(packageJSON, null, 2));
@@ -108,7 +123,12 @@ const createFiles = (values) => {
     try {
         fs_1.default.mkdirSync(".vscode");
         fs_1.default.writeFileSync("./.vscode/extensions.json", vscode_1.extensions);
-        fs_1.default.writeFileSync("./.vscode/settings.json", vscode_1.settings);
+        if (values.step_3.includes(interfaces_1.E_Helpers.stylelint)) {
+            fs_1.default.writeFileSync("./.vscode/settings.json", vscode_1.settings_stylelint);
+        }
+        else {
+            fs_1.default.writeFileSync("./.vscode/settings.json", vscode_1.settings);
+        }
     }
     catch (e) {
         console.log(".vscode folder already exists");
@@ -123,3 +143,12 @@ const modifyTsconfigJSON = () => {
     fs_1.default.writeFileSync("tsconfig.json", JSON.stringify(tsconfigJSON, null, 2));
 };
 exports.modifyTsconfigJSON = modifyTsconfigJSON;
+const modifyPreCommitFile = () => {
+    const file = `#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+`;
+    fs_1.default.writeFileSync("./.husky/pre-commit", file);
+};
+exports.modifyPreCommitFile = modifyPreCommitFile;

@@ -1,3 +1,5 @@
+import fs from "fs";
+
 import { husky_commands } from "./husky";
 import {
 	I_StepValues,
@@ -10,10 +12,12 @@ import {
 
 export const combineCommands = (values: I_StepValues): string => {
 	let command = "";
+
 	// Если пользователь использует yarn
 	if (values.step_1 === E_PackageManager.yarn) {
 		command += "yarn add -D";
 	}
+
 	// Если пользователь использует npm
 	if (values.step_1 === E_PackageManager.npm) {
 		command += "npm i -D";
@@ -82,7 +86,7 @@ export const combineCommands = (values: I_StepValues): string => {
 	// Если пользователь использует stylelint
 	if (values.step_3.includes(E_Helpers.stylelint)) {
 		command +=
-			" stylelint stylelint-config-standard stylelint-order stylelint-order-config-standard";
+			" stylelint stylelint-config-standard stylelint-config-clean-order";
 
 		if (values.step_4 === E_Styles.sc) {
 			command +=
@@ -92,6 +96,11 @@ export const combineCommands = (values: I_StepValues): string => {
 		if (values.step_4 === E_Styles.scss) {
 			command += " stylelint-config-standard-scss";
 		}
+	}
+
+	// Если гит не инициализирован в проекте
+	if (!fs.existsSync("./.git")) {
+		command += " && git init";
 	}
 
 	// Если пользователь использует Husky + LS

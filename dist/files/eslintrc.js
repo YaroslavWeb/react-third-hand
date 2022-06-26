@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eslintIgnore = exports.vite_eslint_prettier = exports.vite_eslint = exports.next_eslint_prettier = exports.next_eslint = exports.cra_ts_eslint_prettier = exports.cra_ts_eslint = exports.cra_js_eslint_prettier = exports.cra_js_eslint = exports.vite_base_eslint = exports.next_base_eslint = exports.cra_base_eslint = void 0;
 exports.cra_base_eslint = `{
   "extends": ["react-app", "react-app/jest"],
-  "setting": {},
+  "settings": {},
   "plugins": [],
   "rules": {
     "import/order": [
@@ -54,6 +54,10 @@ exports.vite_base_eslint = `{
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended"
   ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "settings": {
     "import/resolver": {
       "node": {
@@ -79,14 +83,14 @@ exports.vite_base_eslint = `{
 `;
 const generateWithTypescript = (config) => {
     const current = JSON.parse(config);
-    current.setting["import/resolver"] = { typescript: {} };
-    return JSON.stringify(current);
+    current.settings["import/resolver"] = { typescript: {} };
+    return JSON.stringify(current, null, 2);
 };
 const generateWithPrettier = (config) => {
     const current = JSON.parse(config);
     current.plugins = ["prettier"];
     current.rules["prettier/prettier"] = 2;
-    return JSON.stringify(current);
+    return JSON.stringify(current, null, 2);
 };
 exports.cra_js_eslint = exports.cra_base_eslint;
 exports.cra_js_eslint_prettier = generateWithPrettier(exports.cra_base_eslint);

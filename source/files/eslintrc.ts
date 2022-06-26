@@ -1,6 +1,6 @@
 export const cra_base_eslint = `{
   "extends": ["react-app", "react-app/jest"],
-  "setting": {},
+  "settings": {},
   "plugins": [],
   "rules": {
     "import/order": [
@@ -53,6 +53,10 @@ export const vite_base_eslint = `{
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended"
   ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "settings": {
     "import/resolver": {
       "node": {
@@ -79,15 +83,15 @@ export const vite_base_eslint = `{
 
 const generateWithTypescript = (config: string): string => {
 	const current = JSON.parse(config);
-	current.setting["import/resolver"] = { typescript: {} };
-	return JSON.stringify(current);
+	current.settings["import/resolver"] = { typescript: {} };
+	return JSON.stringify(current, null, 2);
 };
 
 const generateWithPrettier = (config: string): string => {
 	const current = JSON.parse(config);
 	current.plugins = ["prettier"];
 	current.rules["prettier/prettier"] = 2;
-	return JSON.stringify(current);
+	return JSON.stringify(current, null, 2);
 };
 
 export const cra_js_eslint = cra_base_eslint;

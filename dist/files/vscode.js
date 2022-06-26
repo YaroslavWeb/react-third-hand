@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.settings = exports.extensions = void 0;
+exports.settings_stylelint = exports.settings = exports.extensions = void 0;
 exports.extensions = `{
   "recommendations": [
     "mikestead.dotenv",
@@ -15,6 +15,17 @@ exports.extensions = `{
 }
 `;
 exports.settings = `{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
+  "cSpell.language": "en,ru",
+  "cSpell.words": [
+    "antd",
+    "reduxjs",
+  ]
+}
+`;
+exports.settings_stylelint = `{
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
 

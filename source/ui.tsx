@@ -16,6 +16,7 @@ const App: FC = () => {
 	const [step, setStep] = useState(0);
 	const [stepItems, setStepItems] = useState<I_Item[]>([]);
 	const [stepValues, setStepValues] = useState<I_StepValues>(initialStepValues);
+	const [info, setInfo] = useState("");
 
 	const handleSelect = (item: I_Item) => {
 		setStepValues((prev) => ({ ...prev, [`step_${step}`]: item.value }));
@@ -38,20 +39,21 @@ const App: FC = () => {
 		if (step === 5) {
 			setTimeout(() => {
 				rockAndRoll();
-			});
+			}, 1000);
 		}
 	}, [step]);
 
 	const rockAndRoll = () => {
 		const command = combineCommands(stepValues);
-		console.log(command);
+		setInfo(`${command}`);
+
 		// Установка пакетов
 		execSync(command, { stdio: "inherit" });
 
 		// Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
 		createFiles(stepValues);
 
-		console.log("Restart your VSCode! To enable ESLint and stylelint parser.");
+		setInfo("Restart your VSCode! To enable ESLint and StyleLint parser.");
 	};
 
 	return (
@@ -71,12 +73,15 @@ const App: FC = () => {
 			)}
 			{step === 5 && (
 				<>
-					<Text>You'r finale choice:</Text>
+					<Text>Your final choice:</Text>
 					{stepItems.map((item) => (
 						<Text key={item.value} color="blueBright">
 							{item.label}
 						</Text>
 					))}
+					<Text backgroundColor="blueBright" color="whiteBright">
+						{info}
+					</Text>
 				</>
 			)}
 		</>

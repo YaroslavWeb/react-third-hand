@@ -12,8 +12,10 @@ import {
 	vite_eslint_prettier,
 } from "./eslintrc";
 import { prettier } from "./prettier";
-import { extensions, settings } from "./vscode";
+import { extensions, settings, settings_stylelint } from "./vscode";
 import {
+	stylelintIgnore,
+	stylelintIgnore_sc,
 	stylelint_css,
 	stylelint_css_prettier,
 	stylelint_sc,
@@ -28,7 +30,7 @@ import {
 	E_Styles,
 	I_StepValues,
 } from "../interfaces";
-import { getStyleScript, scripts } from "./scripts";
+import { getLintStagedScripts, scripts } from "./scripts";
 
 export const createFiles = (values: I_StepValues) => {
 	const data = fs.readFileSync("./package.json", "utf8");
@@ -43,7 +45,8 @@ export const createFiles = (values: I_StepValues) => {
 
 		if (values.step_3.includes(E_Helpers.eslint)) {
 			fs.writeFileSync("./.eslintignore", eslintIgnore);
-			packageJSON.scripts["lint:es"] = "eslint src/";
+			packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
+			packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
 
 			if (values.step_2 === E_Language.js) {
 				if (values.step_3.includes(E_Helpers.prettier)) {
@@ -64,6 +67,11 @@ export const createFiles = (values: I_StepValues) => {
 
 	if (values.step_0 === E_App.next) {
 		if (values.step_3.includes(E_Helpers.eslint)) {
+			packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
+			packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
+
+			fs.rmSync("./.eslintrc.json");
+
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.eslintrc", next_eslint_prettier);
 			} else {
@@ -74,11 +82,21 @@ export const createFiles = (values: I_StepValues) => {
 
 	if (values.step_0 === E_App.vite) {
 		if (values.step_3.includes(E_Helpers.eslint)) {
+			packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
+			packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
+
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.eslintrc", vite_eslint_prettier);
 			} else {
 				fs.writeFileSync("./.eslintrc", vite_eslint);
 			}
+		}
+	}
+
+	// ESLint
+	if (values.step_3.includes(E_Helpers.prettier)) {
+		if (values.step_3.includes(E_Helpers.prettier)) {
+			fs.writeFileSync("./.prettierrc", prettier);
 		}
 	}
 
@@ -91,9 +109,12 @@ export const createFiles = (values: I_StepValues) => {
 
 	// Stylelint
 	if (values.step_3.includes(E_Helpers.stylelint)) {
-		fs.writeFileSync("./.stylelintignore", eslintIgnore);
 		if (values.step_4 === E_Styles.css) {
+			fs.writeFileSync("./.stylelintignore", stylelintIgnore);
 			packageJSON.scripts[scripts[values.step_4]] = "stylelint src/";
+			packageJSON.scripts[scripts[values.step_4] + ":fix"] = `${
+				scripts[values.step_4]
+			} -- --fix`;
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.stylelintrc", stylelint_css_prettier);
 			} else {
@@ -102,7 +123,11 @@ export const createFiles = (values: I_StepValues) => {
 		}
 
 		if (values.step_4 === E_Styles.scss) {
+			fs.writeFileSync("./.stylelintignore", stylelintIgnore);
 			packageJSON.scripts[scripts[values.step_4]] = "stylelint src/";
+			packageJSON.scripts[scripts[values.step_4] + ":fix"] = `${
+				scripts[values.step_4]
+			} -- --fix`;
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.stylelintrc", stylelint_scss_prettier);
 			} else {
@@ -111,6 +136,7 @@ export const createFiles = (values: I_StepValues) => {
 		}
 
 		if (values.step_4 === E_Styles.sc) {
+			fs.writeFileSync("./.stylelintignore", stylelintIgnore_sc);
 			packageJSON.scripts[scripts[values.step_4]] = "stylelint src/";
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.stylelintrc", stylelint_sc_prettier);
@@ -121,9 +147,11 @@ export const createFiles = (values: I_StepValues) => {
 	}
 
 	if (values.step_3.includes(E_Helpers.h_ls)) {
-		packageJSON["lint-staged"] = {
-			"*.(ts|tsx|js|jsx)": ["yarn lint:es", getStyleScript(values.step_4)],
-		};
+		packageJSON["lint-staged"] = getLintStagedScripts(
+			values.step_3,
+			values.step_4
+		);
+		modifyPreCommitFile();
 	}
 
 	// Пересоздаём package.json
@@ -133,7 +161,11 @@ export const createFiles = (values: I_StepValues) => {
 	try {
 		fs.mkdirSync(".vscode");
 		fs.writeFileSync("./.vscode/extensions.json", extensions);
-		fs.writeFileSync("./.vscode/settings.json", settings);
+		if (values.step_3.includes(E_Helpers.stylelint)) {
+			fs.writeFileSync("./.vscode/settings.json", settings_stylelint);
+		} else {
+			fs.writeFileSync("./.vscode/settings.json", settings);
+		}
 	} catch (e) {
 		console.log(".vscode folder already exists");
 	}
@@ -146,4 +178,14 @@ export const modifyTsconfigJSON = () => {
 	// Добавление опции baseUrl
 	tsconfigJSON.compilerOptions.baseUrl = "src";
 	fs.writeFileSync("tsconfig.json", JSON.stringify(tsconfigJSON, null, 2));
+};
+
+export const modifyPreCommitFile = () => {
+	const file = `#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx lint-staged
+`;
+
+	fs.writeFileSync("./.husky/pre-commit", file);
 };

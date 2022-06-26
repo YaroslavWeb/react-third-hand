@@ -46,7 +46,11 @@ export const Helpers_3 = ({ onSubmit }: Helpers_3Props) => {
 				<Text color="blue">Space</Text>
 				<Text color="white">: Select</Text>
 			</Box>
-			<MultiSelect items={items} selected={items} onSubmit={handleSubmit} />
+			<MultiSelect
+				items={items}
+				defaultSelected={items}
+				onSubmit={handleSubmit}
+			/>
 		</>
 	);
 };

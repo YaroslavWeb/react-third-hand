@@ -16,6 +16,18 @@ export const settings = `{
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
 
+  "cSpell.language": "en,ru",
+  "cSpell.words": [
+    "antd",
+    "reduxjs",
+  ]
+}
+`;
+
+export const settings_stylelint = `{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+
   "stylelint.useLocal": true,
   "stylelint.autoFixOnSave": true,
 
