@@ -2,7 +2,7 @@
 	"name": "react-third-hand",
 	"author": "yaroslavweb",
 	"description": "Workspace customizer for react app",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"homepage": "https://github.com/YaroslavWeb/react-third-hand",
 	"license": "MIT",
 	"bin": "dist/cli.js",
