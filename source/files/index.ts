@@ -6,10 +6,12 @@ import {
 	cra_ts_eslint,
 	cra_ts_eslint_prettier,
 	eslintIgnore,
-	next_base_eslint,
+	next_eslint,
 	next_eslint_prettier,
-	vite_eslint,
-	vite_eslint_prettier,
+	vite_eslint_js,
+	vite_eslint_prettier_js,
+	vite_eslint_ts,
+	vite_eslint_prettier_ts,
 } from "./eslintrc";
 import { prettier } from "./prettier";
 import { extensions, settings, settings_stylelint } from "./vscode";
@@ -75,7 +77,7 @@ export const createFiles = (values: I_StepValues) => {
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.eslintrc", next_eslint_prettier);
 			} else {
-				fs.writeFileSync("./.eslintrc", next_base_eslint);
+				fs.writeFileSync("./.eslintrc", next_eslint);
 			}
 		}
 	}
@@ -86,9 +88,24 @@ export const createFiles = (values: I_StepValues) => {
 			packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
 
 			if (values.step_3.includes(E_Helpers.prettier)) {
-				fs.writeFileSync("./.eslintrc", vite_eslint_prettier);
+				fs.writeFileSync("./.eslintrc", vite_eslint_prettier_js);
 			} else {
-				fs.writeFileSync("./.eslintrc", vite_eslint);
+				fs.writeFileSync("./.eslintrc", vite_eslint_js);
+			}
+
+			if (values.step_2 === E_Language.js) {
+				if (values.step_3.includes(E_Helpers.prettier)) {
+					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_js);
+				} else {
+					fs.writeFileSync("./.eslintrc", vite_eslint_js);
+				}
+			}
+			if (values.step_2 === E_Language.ts) {
+				if (values.step_3.includes(E_Helpers.prettier)) {
+					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_ts);
+				} else {
+					fs.writeFileSync("./.eslintrc", vite_eslint_ts);
+				}
 			}
 		}
 	}

@@ -50,7 +50,7 @@ const createFiles = (values) => {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.next_eslint_prettier);
             }
             else {
-                fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.next_base_eslint);
+                fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.next_eslint);
             }
         }
     }
@@ -59,10 +59,26 @@ const createFiles = (values) => {
             packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
             packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
             if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
-                fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier);
+                fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_js);
             }
             else {
-                fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint);
+                fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_js);
+            }
+            if (values.step_2 === interfaces_1.E_Language.js) {
+                if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
+                    fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_js);
+                }
+                else {
+                    fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_js);
+                }
+            }
+            if (values.step_2 === interfaces_1.E_Language.ts) {
+                if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
+                    fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_ts);
+                }
+                else {
+                    fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_ts);
+                }
             }
         }
     }
