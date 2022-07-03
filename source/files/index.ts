@@ -72,7 +72,11 @@ export const createFiles = (values: I_StepValues) => {
 			packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
 			packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
 
-			fs.rmSync("./.eslintrc.json");
+			try {
+				fs.rmSync("./.eslintrc.json");
+			} catch (e) {
+				console.log(".eslintrc.json not found");
+			}
 
 			if (values.step_3.includes(E_Helpers.prettier)) {
 				fs.writeFileSync("./.eslintrc", next_eslint_prettier);

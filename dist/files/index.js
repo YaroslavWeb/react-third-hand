@@ -45,7 +45,12 @@ const createFiles = (values) => {
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
             packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
             packageJSON.scripts["lint:es:fix"] = "npm run lint:es -- --fix";
-            fs_1.default.rmSync("./.eslintrc.json");
+            try {
+                fs_1.default.rmSync("./.eslintrc.json");
+            }
+            catch (e) {
+                console.log(".eslintrc.json not found");
+            }
             if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.next_eslint_prettier);
             }
