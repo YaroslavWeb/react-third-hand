@@ -61,12 +61,13 @@ export const combineCommands = (values: I_StepValues): string => {
 
 	// Если пользователь выбрал vite
 	if (values.step_0 === E_App.vite) {
+		command += " vite-plugin-svgr";
 		if (values.step_3.includes(E_Helpers.eslint)) {
 			command +=
 				" eslint eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import";
 			if (values.step_2 === E_Language.ts) {
 				command +=
-					" eslint-import-resolver-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin";
+					" eslint-import-resolver-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin vite-tsconfig-paths";
 			}
 		}
 

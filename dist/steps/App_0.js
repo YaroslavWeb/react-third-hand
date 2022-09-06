@@ -28,9 +28,6 @@ const App_0 = ({ onSelect, }) => {
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         react_1.default.createElement(ink_1.Text, { color: "green" }, "Choose your React app:"),
-        react_1.default.createElement(ink_select_input_1.default, { items: items, onSelect: handleSelect }),
-        react_1.default.createElement(ink_1.Text, null, "____"),
-        react_1.default.createElement(ink_1.Text, { color: "#F07427" }, "Soon:"),
-        react_1.default.createElement(ink_1.Text, null, "Webpack")));
+        react_1.default.createElement(ink_select_input_1.default, { items: items, onSelect: handleSelect })));
 };
 exports.App_0 = App_0;

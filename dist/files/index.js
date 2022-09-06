@@ -11,6 +11,7 @@ const vscode_1 = require("./vscode");
 const stylelintrc_1 = require("./stylelintrc");
 const interfaces_1 = require("../interfaces");
 const scripts_1 = require("./scripts");
+const vite_1 = require("./vite");
 const createFiles = (values) => {
     const data = fs_1.default.readFileSync("./package.json", "utf8");
     const packageJSON = JSON.parse(data);
@@ -70,6 +71,7 @@ const createFiles = (values) => {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_js);
             }
             if (values.step_2 === interfaces_1.E_Language.js) {
+                fs_1.default.writeFileSync("./vite.config.js", vite_1.vite_config_js);
                 if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_js);
                 }
@@ -78,6 +80,7 @@ const createFiles = (values) => {
                 }
             }
             if (values.step_2 === interfaces_1.E_Language.ts) {
+                fs_1.default.writeFileSync("./vite.config.ts", vite_1.vite_config_ts);
                 if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_ts);
                 }

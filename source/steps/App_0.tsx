@@ -29,9 +29,6 @@ export const App_0: FC<{ onSelect: (item: I_Item) => void }> = ({
 		<>
 			<Text color="green">Choose your React app:</Text>
 			<SelectInput items={items} onSelect={handleSelect} />
-			<Text>____</Text>
-			<Text color="#F07427">Soon:</Text>
-			<Text>Webpack</Text>
 		</>
 	);
 };

@@ -48,12 +48,13 @@ const combineCommands = (values) => {
     }
     // Если пользователь выбрал vite
     if (values.step_0 === interfaces_1.E_App.vite) {
+        command += " vite-plugin-svgr";
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
             command +=
                 " eslint eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import";
             if (values.step_2 === interfaces_1.E_Language.ts) {
                 command +=
-                    " eslint-import-resolver-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin";
+                    " eslint-import-resolver-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin vite-tsconfig-paths";
             }
         }
         if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {

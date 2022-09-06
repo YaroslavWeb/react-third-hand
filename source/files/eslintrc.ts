@@ -87,7 +87,8 @@ export const vite_base_eslint_ts = `{
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
-    "plugin:jsx-a11y/recommended"
+    "plugin:jsx-a11y/recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
   "env": {
     "browser": true,
@@ -109,6 +110,13 @@ export const vite_base_eslint_ts = `{
   },
   "rules": {
     "react/react-in-jsx-scope": 0,
+    "@typescript-eslint/no-empty-interface": 0,
+    "import/no-unresolved": [
+      2,
+      {
+        "ignore": [".svg"]
+      }
+    ],
     "import/order": [
       2,
       {

@@ -33,6 +33,7 @@ import {
 	I_StepValues,
 } from "../interfaces";
 import { getLintStagedScripts, scripts } from "./scripts";
+import { vite_config_js, vite_config_ts } from "./vite";
 
 export const createFiles = (values: I_StepValues) => {
 	const data = fs.readFileSync("./package.json", "utf8");
@@ -98,6 +99,7 @@ export const createFiles = (values: I_StepValues) => {
 			}
 
 			if (values.step_2 === E_Language.js) {
+				fs.writeFileSync("./vite.config.js", vite_config_js);
 				if (values.step_3.includes(E_Helpers.prettier)) {
 					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_js);
 				} else {
@@ -105,6 +107,7 @@ export const createFiles = (values: I_StepValues) => {
 				}
 			}
 			if (values.step_2 === E_Language.ts) {
+				fs.writeFileSync("./vite.config.ts", vite_config_ts);
 				if (values.step_3.includes(E_Helpers.prettier)) {
 					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_ts);
 				} else {
