@@ -25,35 +25,35 @@ const App: FC = () => {
 	};
 
 	const handleSubmitHelpers = (items: I_Item[]) => {
+		const values = items.map((item: I_Item) => item.value as E_Helpers);
+		setStepValues((prev) => ({ ...prev, step_3: values }));
+		setStepItems((prev) => [...prev, ...items]);
 		if (items.some((item: I_Item) => item.value === "stylelint")) {
 			setStep((prev) => ++prev);
 		} else {
 			setStep((prev) => prev + 2);
 		}
-		const values = items.map((item: I_Item) => item.value as E_Helpers);
-		setStepValues((prev) => ({ ...prev, step_3: values }));
-		setStepItems((prev) => [...prev, ...items]);
 	};
 
 	useEffect(() => {
 		if (step === 5) {
-			setTimeout(() => {
-				rockAndRoll();
-			}, 1000);
+			rockAndRoll();
 		}
 	}, [step]);
 
 	const rockAndRoll = () => {
-		const command = combineCommands(stepValues);
-		setInfo(`${command}`);
+		setTimeout(() => {
+			const command = combineCommands(stepValues);
+			setInfo(`${command}`);
 
-		// Установка пакетов
-		execSync(command, { stdio: "inherit" });
+			// Установка пакетов
+			execSync(command, { stdio: "inherit" });
 
-		// Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
-		createFiles(stepValues);
+			// Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
+			createFiles(stepValues);
 
-		setInfo("Restart your VSCode! To enable ESLint and StyleLint parser.");
+			setInfo("Restart your VSCode! To enable ESLint and StyleLint parser.");
+		}, 1000);
 	};
 
 	return (

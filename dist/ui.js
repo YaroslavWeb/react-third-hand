@@ -25,15 +25,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const ink_1 = require("ink");
-const child_process_1 = require("child_process");
+// import { execSync } from "child_process";
 const App_0_1 = require("./steps/App_0");
 const PackageManager_1_1 = require("./steps/PackageManager_1");
 const Language_2_1 = require("./steps/Language_2");
 const Helpers_3_1 = require("./steps/Helpers_3");
 const Styles_4_1 = require("./steps/Styles_4");
 const data_1 = require("./data");
-const commands_1 = require("./commands");
-const files_1 = require("./files");
+// import { combineCommands } from "./commands";
+// import { createFiles } from "./files";
 const App = () => {
     const [step, setStep] = (0, react_1.useState)(0);
     const [stepItems, setStepItems] = (0, react_1.useState)([]);
@@ -45,31 +45,33 @@ const App = () => {
         setStepItems((prev) => [...prev, item]);
     };
     const handleSubmitHelpers = (items) => {
+        const values = items.map((item) => item.value);
+        console.log(values);
+        setStepValues((prev) => ({ ...prev, step_3: values }));
+        setStepItems((prev) => [...prev, ...items]);
         if (items.some((item) => item.value === "stylelint")) {
             setStep((prev) => ++prev);
         }
         else {
             setStep((prev) => prev + 2);
         }
-        const values = items.map((item) => item.value);
-        setStepValues((prev) => ({ ...prev, step_3: values }));
-        setStepItems((prev) => [...prev, ...items]);
     };
     (0, react_1.useEffect)(() => {
         if (step === 5) {
-            setTimeout(() => {
-                rockAndRoll();
-            }, 1000);
+            rockAndRoll();
         }
     }, [step]);
     const rockAndRoll = () => {
-        const command = (0, commands_1.combineCommands)(stepValues);
-        setInfo(`${command}`);
-        // Установка пакетов
-        (0, child_process_1.execSync)(command, { stdio: "inherit" });
-        // Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
-        (0, files_1.createFiles)(stepValues);
-        setInfo("Restart your VSCode! To enable ESLint and StyleLint parser.");
+        setTimeout(() => {
+            // const command = combineCommands(stepValues);
+            // setInfo(`${command}`);
+            console.log(stepValues, "stepValues");
+            // Установка пакетов
+            // execSync(command, { stdio: "inherit" });
+            // Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
+            // createFiles(stepValues);
+            setInfo("Restart your VSCode! To enable ESLint and StyleLint parser.");
+        }, 1000);
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         step === 0 && react_1.default.createElement(App_0_1.App_0, { onSelect: (item) => handleSelect(item) }),

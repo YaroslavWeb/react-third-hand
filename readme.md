@@ -1,5 +1,7 @@
 # react-third-hand
 
+CLI helper for React: ESLint, StyleLint, Prettier, Husky
+
 ## Install
 
 **npm:**

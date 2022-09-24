@@ -117,18 +117,9 @@ export const createFiles = (values: I_StepValues) => {
 		}
 	}
 
-	// ESLint
-	if (values.step_3.includes(E_Helpers.prettier)) {
-		if (values.step_3.includes(E_Helpers.prettier)) {
-			fs.writeFileSync("./.prettierrc", prettier);
-		}
-	}
-
 	// Prettier
 	if (values.step_3.includes(E_Helpers.prettier)) {
-		if (values.step_3.includes(E_Helpers.prettier)) {
-			fs.writeFileSync("./.prettierrc", prettier);
-		}
+		fs.writeFileSync("./.prettierrc", prettier);
 	}
 
 	// Stylelint

@@ -90,17 +90,9 @@ const createFiles = (values) => {
             }
         }
     }
-    // ESLint
-    if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
-        if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
-            fs_1.default.writeFileSync("./.prettierrc", prettier_1.prettier);
-        }
-    }
     // Prettier
     if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
-        if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
-            fs_1.default.writeFileSync("./.prettierrc", prettier_1.prettier);
-        }
+        fs_1.default.writeFileSync("./.prettierrc", prettier_1.prettier);
     }
     // Stylelint
     if (values.step_3.includes(interfaces_1.E_Helpers.stylelint)) {
