@@ -25,15 +25,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const ink_1 = require("ink");
-// import { execSync } from "child_process";
+const child_process_1 = require("child_process");
 const App_0_1 = require("./steps/App_0");
 const PackageManager_1_1 = require("./steps/PackageManager_1");
 const Language_2_1 = require("./steps/Language_2");
 const Helpers_3_1 = require("./steps/Helpers_3");
 const Styles_4_1 = require("./steps/Styles_4");
 const data_1 = require("./data");
-// import { combineCommands } from "./commands";
-// import { createFiles } from "./files";
+const commands_1 = require("./commands");
+const files_1 = require("./files");
 const App = () => {
     const [step, setStep] = (0, react_1.useState)(0);
     const [stepItems, setStepItems] = (0, react_1.useState)([]);
@@ -46,7 +46,6 @@ const App = () => {
     };
     const handleSubmitHelpers = (items) => {
         const values = items.map((item) => item.value);
-        console.log(values);
         setStepValues((prev) => ({ ...prev, step_3: values }));
         setStepItems((prev) => [...prev, ...items]);
         if (items.some((item) => item.value === "stylelint")) {
@@ -63,13 +62,12 @@ const App = () => {
     }, [step]);
     const rockAndRoll = () => {
         setTimeout(() => {
-            // const command = combineCommands(stepValues);
-            // setInfo(`${command}`);
-            console.log(stepValues, "stepValues");
+            const command = (0, commands_1.combineCommands)(stepValues);
+            setInfo(`${command}`);
             // Установка пакетов
-            // execSync(command, { stdio: "inherit" });
+            (0, child_process_1.execSync)(command, { stdio: "inherit" });
             // Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
-            // createFiles(stepValues);
+            (0, files_1.createFiles)(stepValues);
             setInfo("Restart your VSCode! To enable ESLint and StyleLint parser.");
         }, 1000);
     };
