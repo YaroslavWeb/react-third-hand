@@ -6,16 +6,16 @@ import { E_App, I_Item } from "../interfaces";
 
 const items: I_Item[] = [
 	{
+		label: "Vite",
+		value: E_App.vite,
+	},
+	{
 		label: "Create-React-App",
 		value: E_App.cra,
 	},
 	{
 		label: "Next",
 		value: E_App.next,
-	},
-	{
-		label: "Vite",
-		value: E_App.vite,
 	},
 ];
 

@@ -15,7 +15,9 @@ var E_PackageManager;
 var E_Language;
 (function (E_Language) {
     E_Language["ts"] = "ts";
+    E_Language["tsSWC"] = "tsSWC";
     E_Language["js"] = "js";
+    E_Language["jsSWC"] = "jsSWC";
 })(E_Language = exports.E_Language || (exports.E_Language = {}));
 var E_Helpers;
 (function (E_Helpers) {

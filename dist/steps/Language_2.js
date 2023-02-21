@@ -14,16 +14,24 @@ const items = [
         value: interfaces_1.E_Language.ts,
     },
     {
+        label: "TypeScript + SWC",
+        value: interfaces_1.E_Language.tsSWC
+    },
+];
+const vite_items = [...items, {
         label: "JavaScript",
         value: interfaces_1.E_Language.js,
     },
-];
-const Language_2 = ({ onSelect, }) => {
+    {
+        label: "JavaScript + SWC",
+        value: interfaces_1.E_Language.jsSWC,
+    }];
+const Language_2 = ({ onSelect, stepValues }) => {
     const handleSelect = (item) => {
         onSelect(item);
     };
     return (react_1.default.createElement(react_1.default.Fragment, null,
         react_1.default.createElement(ink_1.Text, { color: "green" }, "Choose your language:"),
-        react_1.default.createElement(ink_select_input_1.default, { items: items, onSelect: handleSelect })));
+        react_1.default.createElement(ink_select_input_1.default, { items: stepValues.step_0 === interfaces_1.E_App.vite ? vite_items : items, onSelect: handleSelect })));
 };
 exports.Language_2 = Language_2;

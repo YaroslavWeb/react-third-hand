@@ -48,7 +48,18 @@ export const Helpers_3 = ({ onSubmit }: Helpers_3Props) => {
 			</Box>
 			<MultiSelect
 				items={items}
-				defaultSelected={items}
+				defaultSelected={[{
+					label: "ESLint",
+					value: E_Helpers.eslint,
+				},
+				{
+					label: "StyleLint",
+					value: E_Helpers.stylelint,
+				},
+				{
+					label: "Prettier",
+					value: E_Helpers.prettier,
+				}]}
 				onSubmit={handleSubmit}
 			/>
 		</>

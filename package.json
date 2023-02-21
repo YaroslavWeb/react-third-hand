@@ -2,7 +2,7 @@
 	"name": "react-third-hand",
 	"author": "yaroslavweb",
 	"description": "Workspace customizer for react app",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"homepage": "https://github.com/YaroslavWeb/react-third-hand",
 	"license": "MIT",
 	"bin": "dist/cli.js",
@@ -11,7 +11,7 @@
 	},
 	"scripts": {
 		"build": "tsc && chmod +x dist/cli.js",
-		"start": "npm run build && dist/cli.js",
+		"start": "npm run build && node dist/cli.js",
 		"pretest": "npm run build",
 		"test": "xo && ava"
 	},

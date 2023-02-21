@@ -10,16 +10,16 @@ const ink_select_input_1 = __importDefault(require("ink-select-input"));
 const interfaces_1 = require("../interfaces");
 const items = [
     {
+        label: "Vite",
+        value: interfaces_1.E_App.vite,
+    },
+    {
         label: "Create-React-App",
         value: interfaces_1.E_App.cra,
     },
     {
         label: "Next",
         value: interfaces_1.E_App.next,
-    },
-    {
-        label: "Vite",
-        value: interfaces_1.E_App.vite,
     },
 ];
 const App_0 = ({ onSelect, }) => {

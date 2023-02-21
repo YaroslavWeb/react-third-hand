@@ -13,7 +13,9 @@ export declare enum E_PackageManager {
 }
 export declare enum E_Language {
     ts = "ts",
-    js = "js"
+    tsSWC = "tsSWC",
+    js = "js",
+    jsSWC = "jsSWC"
 }
 export declare enum E_Helpers {
     eslint = "eslint",

@@ -12,9 +12,22 @@ export const extensions = `{
 }
 `;
 
-export const settings = `{
+export const settings_eslint = `{
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.format.enable": true,
 
   "cSpell.language": "en,ru",
   "cSpell.words": [
@@ -24,12 +37,9 @@ export const settings = `{
 }
 `;
 
-export const settings_stylelint = `{
+export const settings = `{
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-
-  "stylelint.useLocal": true,
-  "stylelint.autoFixOnSave": true,
 
   "cSpell.language": "en,ru",
   "cSpell.words": [

@@ -14,7 +14,7 @@ import {
 	vite_eslint_prettier_ts,
 } from "./eslintrc";
 import { prettier } from "./prettier";
-import { extensions, settings, settings_stylelint } from "./vscode";
+import { extensions, settings, settings_eslint } from "./vscode";
 import {
 	stylelintIgnore,
 	stylelintIgnore_sc,
@@ -33,7 +33,7 @@ import {
 	I_StepValues,
 } from "../interfaces";
 import { getLintStagedScripts, scripts } from "./scripts";
-import { vite_config_js, vite_config_ts } from "./vite";
+import { vite_config_js, vite_config_ts, vite_config_jsSWC, vite_config_tsSWC } from "./vite";
 
 export const createFiles = (values: I_StepValues) => {
 	const data = fs.readFileSync("./package.json", "utf8");
@@ -98,16 +98,16 @@ export const createFiles = (values: I_StepValues) => {
 				fs.writeFileSync("./.eslintrc", vite_eslint_js);
 			}
 
-			if (values.step_2 === E_Language.js) {
-				fs.writeFileSync("./vite.config.js", vite_config_js);
+			if (values.step_2 === E_Language.js || values.step_2 === E_Language.jsSWC) {
+				fs.writeFileSync("./vite.config.js", values.step_2 === E_Language.jsSWC ? vite_config_jsSWC : vite_config_js);
 				if (values.step_3.includes(E_Helpers.prettier)) {
 					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_js);
 				} else {
 					fs.writeFileSync("./.eslintrc", vite_eslint_js);
 				}
 			}
-			if (values.step_2 === E_Language.ts) {
-				fs.writeFileSync("./vite.config.ts", vite_config_ts);
+			if (values.step_2 === E_Language.ts || values.step_2 === E_Language.tsSWC) {
+				fs.writeFileSync("./vite.config.ts", values.step_2 === E_Language.tsSWC ? vite_config_tsSWC : vite_config_ts );
 				if (values.step_3.includes(E_Helpers.prettier)) {
 					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_ts);
 				} else {
@@ -176,8 +176,8 @@ export const createFiles = (values: I_StepValues) => {
 	try {
 		fs.mkdirSync(".vscode");
 		fs.writeFileSync("./.vscode/extensions.json", extensions);
-		if (values.step_3.includes(E_Helpers.stylelint)) {
-			fs.writeFileSync("./.vscode/settings.json", settings_stylelint);
+		if (values.step_3.includes(E_Helpers.eslint)) {
+			fs.writeFileSync("./.vscode/settings.json", settings_eslint);
 		} else {
 			fs.writeFileSync("./.vscode/settings.json", settings);
 		}

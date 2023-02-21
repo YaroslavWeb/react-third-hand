@@ -70,8 +70,8 @@ const createFiles = (values) => {
             else {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_js);
             }
-            if (values.step_2 === interfaces_1.E_Language.js) {
-                fs_1.default.writeFileSync("./vite.config.js", vite_1.vite_config_js);
+            if (values.step_2 === interfaces_1.E_Language.js || values.step_2 === interfaces_1.E_Language.jsSWC) {
+                fs_1.default.writeFileSync("./vite.config.js", values.step_2 === interfaces_1.E_Language.jsSWC ? vite_1.vite_config_jsSWC : vite_1.vite_config_js);
                 if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_js);
                 }
@@ -79,8 +79,8 @@ const createFiles = (values) => {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_js);
                 }
             }
-            if (values.step_2 === interfaces_1.E_Language.ts) {
-                fs_1.default.writeFileSync("./vite.config.ts", vite_1.vite_config_ts);
+            if (values.step_2 === interfaces_1.E_Language.ts || values.step_2 === interfaces_1.E_Language.tsSWC) {
+                fs_1.default.writeFileSync("./vite.config.ts", values.step_2 === interfaces_1.E_Language.tsSWC ? vite_1.vite_config_tsSWC : vite_1.vite_config_ts);
                 if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_ts);
                 }
@@ -139,8 +139,8 @@ const createFiles = (values) => {
     try {
         fs_1.default.mkdirSync(".vscode");
         fs_1.default.writeFileSync("./.vscode/extensions.json", vscode_1.extensions);
-        if (values.step_3.includes(interfaces_1.E_Helpers.stylelint)) {
-            fs_1.default.writeFileSync("./.vscode/settings.json", vscode_1.settings_stylelint);
+        if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
+            fs_1.default.writeFileSync("./.vscode/settings.json", vscode_1.settings_eslint);
         }
         else {
             fs_1.default.writeFileSync("./.vscode/settings.json", vscode_1.settings);
