@@ -38,7 +38,10 @@ export const combineCommands = (values: I_StepValues): string => {
 		}
 
 		if (values.step_3.includes(E_Helpers.eslint)) {
-			if (values.step_2 === E_Language.ts) {
+			if (
+				values.step_2 === E_Language.ts ||
+				values.step_2 === E_Language.tsSWC
+			) {
 				command += " eslint-import-resolver-typescript";
 			}
 		}
@@ -65,7 +68,10 @@ export const combineCommands = (values: I_StepValues): string => {
 		if (values.step_3.includes(E_Helpers.eslint)) {
 			command +=
 				" eslint eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import";
-			if (values.step_2 === E_Language.ts) {
+			if (
+				values.step_2 === E_Language.ts ||
+				values.step_2 === E_Language.tsSWC
+			) {
 				command +=
 					" eslint-import-resolver-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin vite-tsconfig-paths";
 			}

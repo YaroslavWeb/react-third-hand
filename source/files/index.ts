@@ -44,7 +44,7 @@ export const createFiles = (values: I_StepValues) => {
 	const data = fs.readFileSync("./package.json", "utf8");
 	const packageJSON = JSON.parse(data);
 
-	if (values.step_2 === E_Language.ts) {
+	if (values.step_2 === E_Language.ts || values.step_2 === E_Language.tsSWC) {
 		// Модификация tsconfig.json
 		modifyTsconfigJSON();
 	}
