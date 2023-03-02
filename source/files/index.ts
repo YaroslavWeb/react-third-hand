@@ -33,18 +33,25 @@ import {
 	I_StepValues,
 } from "../interfaces";
 import { getLintStagedScripts, scripts } from "./scripts";
-import { vite_config_js, vite_config_ts, vite_config_jsSWC, vite_config_tsSWC } from "./vite";
+import {
+	vite_config_js,
+	vite_config_ts,
+	vite_config_jsSWC,
+	vite_config_tsSWC,
+} from "./vite";
 
 export const createFiles = (values: I_StepValues) => {
 	const data = fs.readFileSync("./package.json", "utf8");
 	const packageJSON = JSON.parse(data);
 
+	if (values.step_2 === E_Language.ts) {
+		// Модификация tsconfig.json
+		modifyTsconfigJSON();
+	}
+
 	if (values.step_0 === E_App.cra) {
 		// Удаление eslintConfig поля
 		delete packageJSON.eslintConfig;
-
-		// Модификация tsconfig.json
-		modifyTsconfigJSON();
 
 		if (values.step_3.includes(E_Helpers.eslint)) {
 			fs.writeFileSync("./.eslintignore", eslintIgnore);
@@ -98,16 +105,32 @@ export const createFiles = (values: I_StepValues) => {
 				fs.writeFileSync("./.eslintrc", vite_eslint_js);
 			}
 
-			if (values.step_2 === E_Language.js || values.step_2 === E_Language.jsSWC) {
-				fs.writeFileSync("./vite.config.js", values.step_2 === E_Language.jsSWC ? vite_config_jsSWC : vite_config_js);
+			if (
+				values.step_2 === E_Language.js ||
+				values.step_2 === E_Language.jsSWC
+			) {
+				fs.writeFileSync(
+					"./vite.config.js",
+					values.step_2 === E_Language.jsSWC
+						? vite_config_jsSWC
+						: vite_config_js
+				);
 				if (values.step_3.includes(E_Helpers.prettier)) {
 					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_js);
 				} else {
 					fs.writeFileSync("./.eslintrc", vite_eslint_js);
 				}
 			}
-			if (values.step_2 === E_Language.ts || values.step_2 === E_Language.tsSWC) {
-				fs.writeFileSync("./vite.config.ts", values.step_2 === E_Language.tsSWC ? vite_config_tsSWC : vite_config_ts );
+			if (
+				values.step_2 === E_Language.ts ||
+				values.step_2 === E_Language.tsSWC
+			) {
+				fs.writeFileSync(
+					"./vite.config.ts",
+					values.step_2 === E_Language.tsSWC
+						? vite_config_tsSWC
+						: vite_config_ts
+				);
 				if (values.step_3.includes(E_Helpers.prettier)) {
 					fs.writeFileSync("./.eslintrc", vite_eslint_prettier_ts);
 				} else {

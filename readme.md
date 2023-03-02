@@ -5,7 +5,7 @@
 🛠️Supported technologies:
 
 - ESLint
-- StyleLint
+- StyleLint _(support v14.16.1 or lower)_
 - Prettier
 - Husky + Lint-Staged
 - VSCode settings
@@ -16,14 +16,12 @@
 - Next
 - Vite
 
----
-
 ## Install and start
 
 ### with NPX:
 
 ```
-$ npx react-third-hand
+$ npx react-third-hand@latest
 ```
 
 ### with NPM:
@@ -37,8 +35,6 @@ Start command in your React App
 ```
 $ react-third-hand
 ```
-
----
 
 ## Options
 

@@ -15,11 +15,13 @@ const vite_1 = require("./vite");
 const createFiles = (values) => {
     const data = fs_1.default.readFileSync("./package.json", "utf8");
     const packageJSON = JSON.parse(data);
+    if (values.step_2 === interfaces_1.E_Language.ts) {
+        // Модификация tsconfig.json
+        (0, exports.modifyTsconfigJSON)();
+    }
     if (values.step_0 === interfaces_1.E_App.cra) {
         // Удаление eslintConfig поля
         delete packageJSON.eslintConfig;
-        // Модификация tsconfig.json
-        (0, exports.modifyTsconfigJSON)();
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
             fs_1.default.writeFileSync("./.eslintignore", eslintrc_1.eslintIgnore);
             packageJSON.scripts["lint:es"] = "eslint --ext .js,.jsx,.ts,.tsx src";
@@ -70,8 +72,11 @@ const createFiles = (values) => {
             else {
                 fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_js);
             }
-            if (values.step_2 === interfaces_1.E_Language.js || values.step_2 === interfaces_1.E_Language.jsSWC) {
-                fs_1.default.writeFileSync("./vite.config.js", values.step_2 === interfaces_1.E_Language.jsSWC ? vite_1.vite_config_jsSWC : vite_1.vite_config_js);
+            if (values.step_2 === interfaces_1.E_Language.js ||
+                values.step_2 === interfaces_1.E_Language.jsSWC) {
+                fs_1.default.writeFileSync("./vite.config.js", values.step_2 === interfaces_1.E_Language.jsSWC
+                    ? vite_1.vite_config_jsSWC
+                    : vite_1.vite_config_js);
                 if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_js);
                 }
@@ -79,8 +84,11 @@ const createFiles = (values) => {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_js);
                 }
             }
-            if (values.step_2 === interfaces_1.E_Language.ts || values.step_2 === interfaces_1.E_Language.tsSWC) {
-                fs_1.default.writeFileSync("./vite.config.ts", values.step_2 === interfaces_1.E_Language.tsSWC ? vite_1.vite_config_tsSWC : vite_1.vite_config_ts);
+            if (values.step_2 === interfaces_1.E_Language.ts ||
+                values.step_2 === interfaces_1.E_Language.tsSWC) {
+                fs_1.default.writeFileSync("./vite.config.ts", values.step_2 === interfaces_1.E_Language.tsSWC
+                    ? vite_1.vite_config_tsSWC
+                    : vite_1.vite_config_ts);
                 if (values.step_3.includes(interfaces_1.E_Helpers.prettier)) {
                     fs_1.default.writeFileSync("./.eslintrc", eslintrc_1.vite_eslint_prettier_ts);
                 }

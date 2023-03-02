@@ -12,7 +12,7 @@ import { initialStepValues } from "./data";
 import { combineCommands } from "./commands";
 import { createFiles } from "./files";
 
-const pjson = require('../package.json');
+const pjson = require("../package.json");
 
 const App: FC = () => {
 	const [step, setStep] = useState(0);
@@ -54,19 +54,26 @@ const App: FC = () => {
 			// Создание файлов: .eslintrc, .stylelintrc, .prettierrc, etc
 			createFiles(stepValues);
 
-			setInfo("Recommended: Restart your VSCode! To enable ESLint and StyleLint parser.");
+			setInfo(
+				"Recommended: Restart your VSCode! To enable ESLint and StyleLint parser."
+			);
 		}, 1000);
 	};
 
 	return (
 		<>
-			<Text  backgroundColor="green" color="whiteBright">💡CLI helper | react-third-hand | v{pjson.version}</Text>
+			<Text backgroundColor="green" color="whiteBright">
+				💡CLI helper | react-third-hand | v{pjson.version}
+			</Text>
 			{step === 0 && <App_0 onSelect={(item: I_Item) => handleSelect(item)} />}
 			{step === 1 && (
 				<PackageManager_1 onSelect={(item: I_Item) => handleSelect(item)} />
 			)}
 			{step === 2 && (
-				<Language_2 stepValues={stepValues} onSelect={(item: I_Item) => handleSelect(item)} />
+				<Language_2
+					stepValues={stepValues}
+					onSelect={(item: I_Item) => handleSelect(item)}
+				/>
 			)}
 			{step === 3 && (
 				<Helpers_3 onSubmit={(items: I_Item[]) => handleSubmitHelpers(items)} />

@@ -34,7 +34,7 @@ const Styles_4_1 = require("./steps/Styles_4");
 const data_1 = require("./data");
 const commands_1 = require("./commands");
 const files_1 = require("./files");
-const pjson = require('../package.json');
+const pjson = require("../package.json");
 const App = () => {
     const [step, setStep] = (0, react_1.useState)(0);
     const [stepItems, setStepItems] = (0, react_1.useState)([]);
@@ -72,9 +72,10 @@ const App = () => {
             setInfo("Recommended: Restart your VSCode! To enable ESLint and StyleLint parser.");
         }, 1000);
     };
-    console.log(pjson.version);
     return (react_1.default.createElement(react_1.default.Fragment, null,
-        react_1.default.createElement(ink_1.Text, { backgroundColor: "green", color: "whiteBright" }, "\uD83D\uDCA1CLI helper | react-third-hand | v1.0.8"),
+        react_1.default.createElement(ink_1.Text, { backgroundColor: "green", color: "whiteBright" },
+            "\uD83D\uDCA1CLI helper | react-third-hand | v",
+            pjson.version),
         step === 0 && react_1.default.createElement(App_0_1.App_0, { onSelect: (item) => handleSelect(item) }),
         step === 1 && (react_1.default.createElement(PackageManager_1_1.PackageManager_1, { onSelect: (item) => handleSelect(item) })),
         step === 2 && (react_1.default.createElement(Language_2_1.Language_2, { stepValues: stepValues, onSelect: (item) => handleSelect(item) })),
