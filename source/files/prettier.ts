@@ -9,7 +9,6 @@ export const prettier = `{
     "trailingComma": "all",
     "bracketSpacing": true,
     "bracketSameLine": false,
-    "arrowParens": "always",
-    "endOfLine": "auto"
+    "arrowParens": "always"
   }
 `;

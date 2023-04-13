@@ -10,24 +10,27 @@ const items: I_Item[] = [
 		value: E_Language.ts,
 	},
 	{
-		label: "TypeScript + SWC",
-		value: E_Language.tsSWC
+		label: "JavaScript",
+		value: E_Language.js,
 	},
 ];
 
-const vite_items = [...items,{
-	label: "JavaScript",
-	value: E_Language.js,
-},
-{
-	label: "JavaScript + SWC",
-	value: E_Language.jsSWC,
-}]
+const vite_items = [
+	...items,
+	{
+		label: "TypeScript + SWC",
+		value: E_Language.tsSWC,
+	},
+	{
+		label: "JavaScript + SWC",
+		value: E_Language.jsSWC,
+	},
+];
 
-export const Language_2: FC<{ onSelect: (item: I_Item) => void, stepValues: I_StepValues }> = ({
-	onSelect,
-	stepValues
-}) => {
+export const Language_2: FC<{
+	onSelect: (item: I_Item) => void;
+	stepValues: I_StepValues;
+}> = ({ onSelect, stepValues }) => {
 	const handleSelect = (item: I_Item) => {
 		onSelect(item);
 	};
@@ -35,7 +38,10 @@ export const Language_2: FC<{ onSelect: (item: I_Item) => void, stepValues: I_St
 	return (
 		<>
 			<Text color="green">Choose your language:</Text>
-			<SelectInput items={stepValues.step_0 === E_App.vite ? vite_items : items} onSelect={handleSelect} />
+			<SelectInput
+				items={stepValues.step_0 === E_App.vite ? vite_items : items}
+				onSelect={handleSelect}
+			/>
 		</>
 	);
 };

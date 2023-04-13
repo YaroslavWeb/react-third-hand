@@ -93,11 +93,10 @@ export const combineCommands = (values: I_StepValues): string => {
 	// Если пользователь использует stylelint
 	if (values.step_3.includes(E_Helpers.stylelint)) {
 		command +=
-			" stylelint@14.16.1 stylelint-config-standard stylelint-config-clean-order";
+			" stylelint stylelint-config-standard stylelint-config-clean-order";
 
 		if (values.step_4 === E_Styles.sc) {
-			command +=
-				" stylelint-config-styled-components stylelint-processor-styled-components";
+			command += " postcss-styled-syntax";
 		}
 
 		if (values.step_4 === E_Styles.scss) {
