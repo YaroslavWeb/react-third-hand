@@ -15,7 +15,7 @@ const vite_1 = require("./vite");
 const createFiles = (values) => {
     const data = fs_1.default.readFileSync("./package.json", "utf8");
     const packageJSON = JSON.parse(data);
-    if (values.step_2 === interfaces_1.E_Language.ts) {
+    if (values.step_2 === interfaces_1.E_Language.ts || values.step_2 === interfaces_1.E_Language.tsSWC) {
         // Модификация tsconfig.json
         (0, exports.modifyTsconfigJSON)();
     }

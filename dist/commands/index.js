@@ -29,7 +29,8 @@ const combineCommands = (values) => {
             }
         }
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
-            if (values.step_2 === interfaces_1.E_Language.ts) {
+            if (values.step_2 === interfaces_1.E_Language.ts ||
+                values.step_2 === interfaces_1.E_Language.tsSWC) {
                 command += " eslint-import-resolver-typescript";
             }
         }
@@ -52,7 +53,8 @@ const combineCommands = (values) => {
         if (values.step_3.includes(interfaces_1.E_Helpers.eslint)) {
             command +=
                 " eslint eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-import";
-            if (values.step_2 === interfaces_1.E_Language.ts) {
+            if (values.step_2 === interfaces_1.E_Language.ts ||
+                values.step_2 === interfaces_1.E_Language.tsSWC) {
                 command +=
                     " eslint-import-resolver-typescript @typescript-eslint/parser @typescript-eslint/eslint-plugin vite-tsconfig-paths";
             }
@@ -70,10 +72,9 @@ const combineCommands = (values) => {
     // Если пользователь использует stylelint
     if (values.step_3.includes(interfaces_1.E_Helpers.stylelint)) {
         command +=
-            " stylelint@14.16.1 stylelint-config-standard stylelint-config-clean-order";
+            " stylelint stylelint-config-standard stylelint-config-clean-order";
         if (values.step_4 === interfaces_1.E_Styles.sc) {
-            command +=
-                " stylelint-config-styled-components stylelint-processor-styled-components";
+            command += " postcss-styled-syntax";
         }
         if (values.step_4 === interfaces_1.E_Styles.scss) {
             command += " stylelint-config-standard-scss";

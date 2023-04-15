@@ -14,18 +14,21 @@ const items = [
         value: interfaces_1.E_Language.ts,
     },
     {
-        label: "TypeScript + SWC",
-        value: interfaces_1.E_Language.tsSWC
-    },
-];
-const vite_items = [...items, {
         label: "JavaScript",
         value: interfaces_1.E_Language.js,
+    },
+];
+const vite_items = [
+    ...items,
+    {
+        label: "TypeScript + SWC",
+        value: interfaces_1.E_Language.tsSWC,
     },
     {
         label: "JavaScript + SWC",
         value: interfaces_1.E_Language.jsSWC,
-    }];
+    },
+];
 const Language_2 = ({ onSelect, stepValues }) => {
     const handleSelect = (item) => {
         onSelect(item);

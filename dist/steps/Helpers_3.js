@@ -42,7 +42,8 @@ const Helpers_3 = ({ onSubmit }) => {
         react_1.default.createElement(ink_1.Box, null,
             react_1.default.createElement(ink_1.Text, { color: "blue" }, "Space"),
             react_1.default.createElement(ink_1.Text, { color: "white" }, ": Select")),
-        react_1.default.createElement(ink_multi_select_1.default, { items: items, defaultSelected: [{
+        react_1.default.createElement(ink_multi_select_1.default, { items: items, defaultSelected: [
+                {
                     label: "ESLint",
                     value: interfaces_1.E_Helpers.eslint,
                 },
@@ -53,6 +54,7 @@ const Helpers_3 = ({ onSubmit }) => {
                 {
                     label: "Prettier",
                     value: interfaces_1.E_Helpers.prettier,
-                }], onSubmit: handleSubmit })));
+                },
+            ], onSubmit: handleSubmit })));
 };
 exports.Helpers_3 = Helpers_3;

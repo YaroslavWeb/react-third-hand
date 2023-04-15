@@ -28,32 +28,8 @@ exports.stylelint_scss = `{
   }
 }`;
 exports.stylelint_sc = `{
-  "processors": [
-    [
-      "stylelint-processor-styled-components",
-      {
-        "moduleName": "styled-components",
-        "importName": "default",
-        "strict": false,
-        "ignoreFiles": [],
-        "parserPlugins": [
-          "jsx",
-          ["decorators", { "decoratorsBeforeExport": true }],
-          "classProperties",
-          "exportExtensions",
-          "functionBind",
-          "functionSent"
-        ]
-      }
-    ]
-  ],
-  "extends": [
-    "stylelint-config-recommended",
-    "stylelint-config-styled-components",
-    "stylelint-config-standard",
-    "stylelint-config-clean-order"
-  ],
-  "plugins": ["stylelint-order"],
+  "extends": ["stylelint-config-standard", "stylelint-config-clean-order"],
+  "customSyntax": "postcss-styled-syntax"
   "rules": {
     "no-empty-source": null
   }
@@ -66,7 +42,7 @@ const generateWithPrettier = (config) => {
 };
 exports.stylelint_css_prettier = generateWithPrettier(exports.stylelint_css);
 exports.stylelint_scss_prettier = generateWithPrettier(exports.stylelint_scss);
-exports.stylelint_sc_prettier = generateWithPrettier(exports.stylelint_sc);
+exports.stylelint_sc_prettier = exports.stylelint_sc;
 exports.stylelintIgnore = `*.tsx
 *.jsx
 *.ts
